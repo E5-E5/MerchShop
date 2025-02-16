@@ -12,12 +12,6 @@ router = APIRouter()
 security = HTTPBearer()
 
 
-# connector = PostgresDBConnector()
-# user_service: UserServiceI = UserService(connector)  # Экземпляр сервиса
-# storage_service: StorageService = StorageService(connector)  # Экземпляр сервиса
-# exchange_service: ExchangeServiceI = ExchangeService(connector)  # Экземпляр сервиса
-
-
 @router.get("/api/info", response_model=InfoResponse, responses={
     400: {"model": ErrorResponse, "description": "Неверный запрос"},
     401: {"model": ErrorResponse, "description": "Неавторизован"},

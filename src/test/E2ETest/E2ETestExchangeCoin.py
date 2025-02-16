@@ -61,7 +61,7 @@ class E2ETestExchangeCoin(unittest.TestCase):
         }
         response = requests.post(f"{self.BASE_URL}/api/sendCoin", json=request_data, headers=headers)
 
-        assert response.status_code == 200  # Успешный ответ
+        assert response.status_code == 200
         assert response.json()["message"] == "Монеты успешно отправлены"
 
         response = requests.get(f"{self.BASE_URL}/api/info", headers=headers)

@@ -11,9 +11,6 @@ router = APIRouter()
 security = HTTPBearer()
 
 
-# connector = PostgresDBConnector()
-# exchange_service: ExchangeServiceI = ExchangeService(connector)
-
 @router.post("/api/sendCoin", responses={
     200: {"description": "Успешный ответ"},
     400: {"model": ErrorResponse, "description": "Неверный запрос"},
