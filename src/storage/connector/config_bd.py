@@ -1,0 +1,5 @@
+host = 'localhost'
+port = '5432'
+database = 'merch_store'
+user = 'postgres'
+password = 'herogem2003'

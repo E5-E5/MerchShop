@@ -1,0 +1,54 @@
+ALTER TABLE cm.User
+ADD CONSTRAINT pk_user PRIMARY KEY (UserID);
+
+ALTER TABLE cm.Merch
+ADD CONSTRAINT pk_merch PRIMARY KEY (MerchID);
+
+ALTER TABLE cm.User
+ADD CONSTRAINT unique_login UNIQUE (Login);
+
+ALTER TABLE cm.Storage
+ADD CONSTRAINT unique_user_merch UNIQUE (UserID, MerchID);
+
+ALTER TABLE cm.User
+ALTER COLUMN FirstName SET NOT NULL,
+ALTER COLUMN LastName SET NOT NULL,
+ALTER COLUMN Login SET NOT NULL,
+ALTER COLUMN Password SET NOT NULL;
+
+ALTER TABLE cm.Merch
+ALTER COLUMN Name SET NOT NULL,
+ALTER COLUMN Coin SET NOT NULL;
+
+ALTER TABLE cm.Exchange
+ALTER COLUMN Date SET NOT NULL;
+
+ALTER TABLE cm.User
+ADD CONSTRAINT coin_non_negative CHECK (Coin >= 0);
+
+ALTER TABLE cm.Merch
+ADD CONSTRAINT coin_positive CHECK (Coin > 0);
+
+ALTER TABLE cm.Merch
+ADD CONSTRAINT count_non_negative CHECK (Count IS NULL OR Count >= 0);
+
+ALTER TABLE cm.Storage
+ADD CONSTRAINT storage_count_non_negative CHECK (Count >= 0);
+
+ALTER TABLE cm.Exchange
+ADD CONSTRAINT transfer_coin_positive CHECK (Coin > 0);
+
+ALTER TABLE cm.Exchange
+ALTER COLUMN Date SET DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE cm.Storage
+ADD CONSTRAINT fk_storage_user FOREIGN KEY (UserID) REFERENCES cm.User(UserID) ON DELETE CASCADE;
+
+ALTER TABLE cm.Storage
+ADD CONSTRAINT fk_storage_merch FOREIGN KEY (MerchID) REFERENCES cm.Merch(MerchID) ON DELETE CASCADE;
+
+ALTER TABLE cm.Exchange
+ADD CONSTRAINT fk_exchange_sender FOREIGN KEY (SenderID) REFERENCES cm.User(UserID) ON DELETE CASCADE;
+
+ALTER TABLE cm.Exchange
+ADD CONSTRAINT fk_exchange_recipient FOREIGN KEY (RecipientID) REFERENCES cm.User(UserID) ON DELETE CASCADE;
