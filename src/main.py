@@ -12,4 +12,4 @@ app.include_router(send_coins.router)
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, world!"}
+    return {"message": "MerchShop"}
